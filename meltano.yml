@@ -1,0 +1,52 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: "tap-sharepointsites"
+environments:
+  - name: dev
+  - name: test
+  - name: prod
+plugins:
+  extractors:
+  - name: "tap-sharepointsites"
+    namespace: "tap_sharepointsites"
+    pip_url: -e .
+    logo_url: https://tap-sharepointsites.s3.eu-central-1.amazonaws.com/sharepointlogo.png
+    settings_group_validation: 
+    - ['api_url', 'lists']
+    capabilities:
+    - state
+    - catalog
+    - discover
+    config:
+      api_url: null
+      lists: []
+    settings:
+    # TODO: To configure using Meltano, declare settings and their types here:
+    - name: api_url
+      label: Site URL
+      documentation: API URL of the sharepoint site where your lists are located.
+      placeholder: Ex. https://graph.microsoft.com/v1.0/sites/my-tenant.com:/sites/my-site:/
+    - name: lists
+      label: Sharepoint Lists
+      documentation: An array of lists to extract, each an object with `name` as a key.
+      placeholder: '["my-list-1", "my-list-2"]'
+    - name: files
+      label: Sharepoint Lists
+      documentation: An array of files to extract.
+      placeholder: '[{"name": "my-file-1", "file_pattern": ".*\.csv", "file_type": "csv", "folder": "my-folder"}]'
+    - name: client_id
+      label: Managed Identity Client ID or Service principle Client ID
+      value: null
+      documentation: Managed Identity Client ID, when authenticating with a user-assigned managed identity Or a Service Principle Client ID
+    - name: tenant_id
+      label: Tenant ID used for authenticating to the graph api
+      value: null
+      documentation: If you are going to use authenticate with a client creditanls fill this in otherwise leave it null
+    - name: client_secret
+      label: Service Principle Client Secret used for authenticating to the graph api
+      value: null
+      documentation: If you are going to use authenticate with a client creditanls fill this in otherwise leave it null
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

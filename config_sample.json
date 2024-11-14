@@ -1,0 +1,7 @@
+{
+    "api_url": "https://graph.microsoft.com/v1.0/sites/my-tenant.com:/sites/my-site:/",
+    "lists": [ "my_first_list", "my_second_list"],
+    "client_id": "fehui3rhui3443-f43fn43uf34-v42f24f43f2-f2f432f4f2",
+    "tenant_id": "fehui3rhui3443-f43fn43uf34-v42f24f43f2-f2f432f4f2",
+    "client_secret": "fehui3rhui3443-f43fn43uf34-v42f24f43f2-f2f432f4f2"
+}
